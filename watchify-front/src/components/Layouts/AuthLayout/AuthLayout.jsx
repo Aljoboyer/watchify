@@ -1,11 +1,13 @@
 import React from "react";
 import AuthLogo from '../../../assets/auth_banner.jpg'
+import RootLayout from "../RootLayout/RootLayout";
 
 const AuthLayout = ({ children }) => {
   return (
-     <div className="h-screen flex flex-col md:flex-row">
+     <RootLayout>
+      <div className="h-screen flex flex-col md:flex-row">
   
-      <div className="hidden md:flex md:w-1/2 text-white flex-col justify-center items-start px-10 ">
+      <div className="hidden md:flex md:w-1/2 text-white flex-col justify-center items-start p-4">
         <img src={AuthLogo} alt="" className="h-full w-full"/>
       </div>
 
@@ -14,6 +16,7 @@ const AuthLayout = ({ children }) => {
             {children}
       </div>
     </div>
+     </RootLayout>
   );
 }
 

@@ -1,15 +1,15 @@
 "use client"
 import React, { useState } from "react";
-import InputField from "@/components/common/Inputs/InputField";
 import { useForm, Controller } from "react-hook-form";
-import { useRouter } from 'next/navigation';
 // import { authErrorchecker } from "../_helper/authErrorcheck";
-import { errorToast } from "@/utils/toaster/toaster";
 import { authFormFields } from "../../constant/formConfigs/authFormConfigs";
+import AllInputs from "../../components/Shared/Inputs/AllInputs";
+import { Buttons } from "../../components/Shared/Buttons/Buttons";
+import { COLORS } from "../../theme/colors";
+import AuthLayout from "../../components/Layouts/AuthLayout/AuthLayout";
 // import { useLogInMutation } from "@/app/redux/features/authApi";
 
 export default function Login() {
-  const router = useRouter()
 //   const [useLoginHandler, { }] = useLogInMutation();
   const [loading, setLoading] = useState(false)
 
@@ -29,10 +29,10 @@ export default function Login() {
       localStorage.setItem('ff_user', JSON.stringify(response.data))
       setLoading(false)
       if(response?.data?.result?.role == 'buyer'){
-          router.push('/flat-finder-home')
+      
       }
       else{
-        router.push('/seller-dashboard-home')
+        
       }
       
     }
@@ -49,7 +49,8 @@ export default function Login() {
   };
 
   return (
- <div className="w-full max-w-md">
+      <AuthLayout>
+        <div className="w-full max-w-md">
           <h2 className="text-title font-bold text-basecolor mb-4">Sign in</h2>
 
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -64,7 +65,7 @@ export default function Login() {
                         ...fieldItem?.required
                       }}
                       render={({ field }) => (
-                          <InputField
+                          <AllInputs
                           otherStyle={{marginTop: '14px'}}
                           label={fieldItem?.label} 
                           field={field}
@@ -78,25 +79,18 @@ export default function Login() {
                 ))
               }
 
-              <div className="flex justify-between items-center">
-                <p onClick={() => router.push('/forgot-password')} className="text-basecolor font-bold text-psm mt-2 cursor-pointer">Forgot Password?</p>
-              </div>
-
             <Buttons
             isLoading={loading}
             type='submit' title="Login" 
-            bgColor={COLORS.side_yellow} textColor="black" 
+            bgColor={COLORS.maroon} textColor="white" 
             other_style={{fontWeight: '700', marginTop: '10px'}} />
         </form>
 
             <p className="text-p text-center mt-4">
-              New to FlatFinder?{" "}
-              <span onClick={() => router.push('/register')} className="font-bold text-basecolor cursor-pointer">Create Account</span>
-            </p>
-
-            <p className="text-sm text-center mt-4 text-gray-600 mt-21">
-              Signing in will use a <a className="underline text-teal-800" href="#">cookie</a>. You can review our <a className="underline text-teal-800" href="#">privacy policy</a>.
+              New to Watchify?{" "}
+              <span onClick={() => console.log('')} className="font-bold text-basecolor cursor-pointer">Create Account</span>
             </p>
         </div>
+      </AuthLayout>
   );
 }
