@@ -23,14 +23,13 @@ import {  Logout } from '@mui/icons-material';
 import ProfileManu from '../../UserCom/ProfileManu';
 import { Buttons } from '../Buttons/Buttons';
 import { COLORS } from '../../../theme/colors';
+import { FiWatch } from "react-icons/fi";
 
 const navItems = [
     {label: 'Home', link: '/flat-finder-home'},
-    {label: 'Flat / Apartment', link: '/search-property', stateValue:  'flat'},
-    {label: 'Showroom', link: '/search-property', stateValue:  'showroom'},
-    {label: 'Resturant', link: '/search-property', stateValue:  'restaurant'},
-    {label: 'Office', link: '/search-property', stateValue:  'office'},
-    {label: 'Services', link: '/services', stateValue:  ''},
+    {label: 'Find Watches', link: '/search-property', stateValue:  'all'},
+    {label: 'Men Watches', link: '/search-property', stateValue:  'men'},
+    {label: 'Women Watches', link: '/search-property', stateValue:  'women'},
 ];
 
 const Navbar = () => {
@@ -47,26 +46,24 @@ const Navbar = () => {
  
   }
 
-
-
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000', boxShadow: 'none' }}>
-      <Box sx={{ borderBottom: `4px solid ${COLORS.side_yellow}` }} />
+    <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000', boxShadow: 'none', }}>
+      <Box sx={{ borderBottom: `4px solid ${COLORS.maroon}` }} />
 
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Toolbar sx={{ justifyContent: 'space-between' , paddingTop: '10px'}}>
         {/* Brand */}
        <div onClick={() => router.push('/flat-finder-home')} className='flex flex-row items-center cursor-pointer'>
-         <Typography variant="h5" sx={{ fontWeight: 'bold', color: COLORS.baseColor }}>
-          Flat
+         <Typography variant="h5" sx={{ fontWeight: 'bold', color: COLORS.maroon }}>
+          WATCH
         </Typography>
-        
-        <Typography variant="h5" sx={{ fontWeight: 'bold', color: COLORS.baseColor }}>Finder</Typography>
+        <FiWatch size={34}/>
+        <Typography variant="h5" sx={{ fontWeight: 'bold', color: COLORS.maroon }}>IFY</Typography>
        </div>
 
         {
           !isMobile &&<Box sx={{ display: 'flex', gap: 3 }}>
             {navItems.map((item) => (
-              <Button onClick={() => navigationHanlder(item)} key={item?.label} sx={{ color: '#000000ff', fontWeight: '600', ":hover":{textDecoration: 'underline', color: COLORS.side_yellow} }}>{item?.label}</Button>
+              <Button onClick={() => navigationHanlder(item)} key={item?.label} sx={{ color: COLORS.baseColor, fontWeight: '600', ":hover":{ backgroundColor: COLORS.maroon, color: 'white'} }}>{item?.label}</Button>
             ))}
           </Box>
         }
@@ -76,12 +73,12 @@ const Navbar = () => {
           {!isMobile && (
             <>
              
-           <ProfileManu /> : 
+           <ProfileManu /> 
             <Button
               variant="contained"
               sx={{
                 backgroundColor: COLORS.overlay,
-                color: COLORS.baseColor,
+                color: COLORS.maroon,
                 display: 'flex',
                 alignItems: 'center',
                 '& .text-link': {
@@ -123,7 +120,7 @@ const Navbar = () => {
         >
           <List>
             {navItems.map((item) => (
-              <ListItem  button key={item?.label}>
+              <ListItem style={{backgroundColor: 'white', marginTop: '5px', color: 'black'}} button key={item?.label}>
                 <ListItemText onClick={() =>{
                    navigationHanlder(item)
                    setDrawerOpen(false)
@@ -134,7 +131,8 @@ const Navbar = () => {
           <Divider />
         
           <List>
-         <ListItem>
+
+          <ListItem>
               <ListItemIcon>
                 <Logout />
               </ListItemIcon>
@@ -147,12 +145,14 @@ const Navbar = () => {
                     router.push('/login')
                   }} title='LOGIN'/>
             </ListItem>
+
              <ListItem>
                 <Buttons onClickHandler={() => {
                   setDrawerOpen(false)
                   router.push('/register')
                 }} title='REGISTER'/>
             </ListItem>
+
           </List>
         </Box>
       </Drawer>

@@ -5,7 +5,7 @@ import { COLORS } from '../../../theme/colors'
 
 export const Buttons = ({
     onClickHandler, title = '', 
-    bgColor = COLORS.overlay, textColor = COLORS.baseColor,
+    bgColor = COLORS.overlay, textColor = COLORS.maroon,
     variant = 'contained',
     icon = '',
     other_style = {},

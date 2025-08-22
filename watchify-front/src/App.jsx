@@ -1,12 +1,19 @@
 import './App.css'
-import Navbar from './components/Shared/NavBars/NavBars'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Toaster } from "react-hot-toast";
+import Home from './pages/shared/Home/Home';
 
 function App() {
 
   return (
-    <div>
-    <Navbar/>
-    </div>
+   <main>
+     <Toaster position="top-right" />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+   </main>
   )
 }
 

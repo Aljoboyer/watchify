@@ -1,7 +1,7 @@
 
 
 export const COLORS = {
-    baseColor: '#017163',
+    baseColor: '#000000',
     side_yellow: '#fff000',
     overlay: '#e6f6f6',
     successOverlay: '#b9f6ca',
@@ -11,6 +11,9 @@ export const COLORS = {
     yellowOverlay: '#fff9e6',
     inActiveOverlay: '#fbece7',
     inActive: '#f44336',
+
+    // ------------Newcolor---------
+    maroon: '#8b0000',
     
     // grey
     grey50: "#f8fafc",
