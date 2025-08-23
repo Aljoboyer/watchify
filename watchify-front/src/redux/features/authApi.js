@@ -1,23 +1,27 @@
+import { reqHeaders } from "../../constant/reqHeaders";
 import { api } from "../api/api";
 
-const authApi = api.injectEndpoints({ 
+const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
-      query: (data ) => ({
-        url: '/user/signup',
-        method: 'POST',
+      query: (data) => ({
+        url: "/auth/signup",
+        method: "POST",
+        headers: reqHeaders,
         body: data,
       }),
-    //   invalidatesTags: [''],
+
     }),
+
     logIn: builder.mutation({
-      query: (data ) => ({
-        url: '/user/login',
-        method: 'POST',
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        headers: reqHeaders,
         body: data,
       }),
-    //   invalidatesTags: [''],
     }),
+
   }),
 });
 

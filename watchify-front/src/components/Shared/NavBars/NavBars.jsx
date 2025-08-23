@@ -27,6 +27,7 @@ import { FiWatch } from "react-icons/fi";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaCartArrowDown } from "react-icons/fa";
 import Cart from '../../Cart/Cart';
+import { getLocalStorageData } from '../../../utils/getLocalStorageData';
 
 const navItems = [
     {label: 'Home', link: '/'},
@@ -43,6 +44,7 @@ const Navbar = () => {
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = React.useState(false);
+  const userData = getLocalStorageData();
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -55,7 +57,11 @@ const Navbar = () => {
     });
   }
 
-  console.log('location -------', location)
+  const logOutHandler = () => {
+    localStorage.removeItem('watchify_user');
+    navigate('/')
+  }
+
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000', boxShadow: 'none', }}>
       <Box sx={{ borderBottom: `4px solid ${COLORS.maroon}` }} />
@@ -84,15 +90,16 @@ const Navbar = () => {
 
         {/* Right Section */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Badge badgeContent={4} color="info" sx={{cursor: 'pointer'}}>
+            {
+              userData?.email && <Badge badgeContent={4} color="info" sx={{cursor: 'pointer'}}>
               <FaCartArrowDown onClick={() => setCartDrawerOpen(true)} color={COLORS.maroon} size={35}/>
             </Badge>
+            }
 
           {!isMobile && (
             <>
-           <ProfileManu /> 
-
-            <Button
+            {
+              userData?.email ? <ProfileManu logOutHandler={logOutHandler}/> : <Button
               variant="contained"
               sx={{
                 backgroundColor: COLORS.overlay,
@@ -116,6 +123,7 @@ const Navbar = () => {
               <span className="divider">/</span>
               <span onClick={() => navigate('/register')} className="text-link">REGISTER</span>
             </Button>
+            }
             
             </>
           )}
@@ -128,9 +136,11 @@ const Navbar = () => {
       </Toolbar>
       
       {/* Cart Drawer */}
-      <Drawer anchor="right" open={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)}>
+      {
+        userData?.email && <Drawer anchor="right" open={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)}>
           <Cart setCartDrawerOpen={setCartDrawerOpen}/>
       </Drawer>
+      }
 
       {/* Mobile Drawer */}
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
@@ -150,18 +160,24 @@ const Navbar = () => {
               </ListItem>
             ))}
           </List>
+
           <Divider />
         
           <List>
 
-          <ListItem>
-              <ListItemIcon>
+           {
+            userData?.email && <ListItem>
+              <ListItemIcon onClick={() => logOutHandler()}>
                 <Logout />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
+           }
 
-            <ListItem>
+
+            {
+              !userData?.email && <>
+                          <ListItem>
                   <Buttons onClickHandler={() => {
                     setDrawerOpen(false)
                     router.push('/login')
@@ -174,6 +190,9 @@ const Navbar = () => {
                   router.push('/register')
                 }} title='REGISTER'/>
             </ListItem>
+              </>
+            }
+
 
           </List>
         </Box>

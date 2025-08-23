@@ -6,6 +6,7 @@ import { Delete } from '@mui/icons-material'
 
 
 export default function Checkout() {
+
   return (
    <RootLayout>
         <div className='w-full'>

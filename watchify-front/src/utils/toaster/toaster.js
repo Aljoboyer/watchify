@@ -7,8 +7,3 @@ export const errorToast = (msg = 'Something went wrong pleae try again!') => {
 export const successToast = (msg) => {
     toast.success(msg);
 }
-
-
-export const notificationToast = (msg) => {
-    toast.success(`📢 ${msg}`);
-}

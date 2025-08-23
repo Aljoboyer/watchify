@@ -1,18 +1,18 @@
-"use client"
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-// import { authErrorchecker } from "../_helper/authErrorcheck";
 import { authFormFields } from "../../constant/formConfigs/authFormConfigs";
 import AllInputs from "../../components/Shared/Inputs/AllInputs";
 import { Buttons } from "../../components/Shared/Buttons/Buttons";
 import { COLORS } from "../../theme/colors";
 import AuthLayout from "../../components/Layouts/AuthLayout/AuthLayout";
-// import { useLogInMutation } from "@/app/redux/features/authApi";
 import { useNavigate } from 'react-router-dom';
 import WText from "../../components/Shared/WText/WText";
+import { useSignUpMutation } from "../../redux/features/authApi";
+import { authErrorchecker } from "../../helper/authErrChecker";
+import { errorToast, successToast } from "../../utils/toaster/toaster";
 
 export default function Register() {
-//   const [useLoginHandler, { }] = useLogInMutation();
+  const [useSignupHandler, { }] = useSignUpMutation();
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -25,23 +25,20 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     setLoading(true)
-    // let response = await useLoginHandler(data);
+    let response = await useSignupHandler(data);
     
+    console.log('response ===>', response)
+
     if(response?.data?.token){
    
-      localStorage.setItem('ff_user', JSON.stringify(response.data))
+      localStorage.setItem('watchify_user', JSON.stringify(response.data))
       setLoading(false)
-      if(response?.data?.result?.role == 'buyer'){
-      
-      }
-      else{
-        
-      }
-      
+      navigate('/')
+      successToast('Successfully Account Created!')
     }
-    else if(response?.error?.data?.message){
+    else if(response?.data?.message){
         setLoading(false)
-        // const checkedData = authErrorchecker(response);
+        const checkedData = authErrorchecker(response);
   
         setError(checkedData?.field, {...checkedData?.typeObj});
     }

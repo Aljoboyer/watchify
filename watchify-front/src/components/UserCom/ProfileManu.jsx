@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { COLORS } from '../../theme/colors';
 
 
-export default function ProfileManu() {
+export default function ProfileManu({logOutHandler}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -20,7 +20,7 @@ export default function ProfileManu() {
 
   const handleClose = (action) => {
     setAnchorEl(null);
-   
+   logOutHandler()
   };
   return (
     <React.Fragment>
