@@ -24,8 +24,8 @@ export const Buttons = ({
      onClick={onClickHandler} 
      variant={variant} 
      fullWidth sx={{...other_style , backgroundColor: bgColor, color: textColor, }}>
-      {icon && icon}
         {title}
+        {icon && icon}
     </Button>
   )
 }

@@ -25,6 +25,7 @@ import { Buttons } from '../Buttons/Buttons';
 import { COLORS } from '../../../theme/colors';
 import { FiWatch } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
+import { FaCartArrowDown } from "react-icons/fa";
 
 const navItems = [
     {label: 'Home', link: '/flat-finder-home'},
@@ -74,7 +75,10 @@ const Navbar = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           {!isMobile && (
             <>
-             
+            <Badge badgeContent={4} color="secondary">
+            <FaCartArrowDown color={COLORS.bluemain} size={35}/>
+          </Badge>
+
            <ProfileManu /> 
             <Button
               variant="contained"
