@@ -5,6 +5,7 @@ import Home from './pages/shared/Home/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import WatchShop from './pages/shared/WatchShop/WatchShop';
+import Checkout from './pages/Checkout/Checkout';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/watch-shop" element={<WatchShop />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
    </main>

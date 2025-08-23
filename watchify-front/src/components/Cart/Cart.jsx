@@ -5,8 +5,11 @@ import { COLORS } from '../../theme/colors'
 import { Delete } from '@mui/icons-material'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import WText from '../Shared/WText/WText'
+import { useNavigate } from 'react-router-dom'
 
 export default function Cart({setCartDrawerOpen}) {
+  const navigate = useNavigate();
+
   return (
  <Box
     sx={{
@@ -53,8 +56,8 @@ export default function Cart({setCartDrawerOpen}) {
                     <span className="px-3">3</span>
                     <button className="px-2"><FaPlus/></button>
                     </div>
-                    <button className="text-gray-500 hover:text-black">
-                    <Delete/>
+                    <button className="cursor-pointer">
+                      <Delete className="text-red-500"/>
                     </button>
                 </div>
                 </div>
@@ -77,6 +80,7 @@ export default function Cart({setCartDrawerOpen}) {
             bgColor={COLORS.baseColor}
             textColor={COLORS.white}
             other_style={{width: '100%', height: '55px'}}
+            onClickHandler={() => navigate('/checkout')}
          />
       </div>
     </div>
