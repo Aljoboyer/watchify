@@ -23,7 +23,7 @@ if(type == 'title_lg'){
   }
   else{
       return (
-           <p>{text}</p>
+           <p className={`text-p font-regular ${otherStyle}`}>{text}</p>
         )
   }
 }

@@ -5,6 +5,14 @@
   /* ----------COLORS------------ */
   --color-basecolor: #000000;
   --color-maroon: #8b0000;
+  --color-grey50:  #f8fafc;
+  --color-grey100: #eef2f6;
+  --color-grey200: #e3e8ef;
+  --color-grey300: #cdd5df;
+  --color-grey500: #697586;
+  --color-grey600: #4b5565;
+  --color-grey700: #364152;
+  --color-grey900: #121926;
 
   /* ----------TEXT SIZE---------- */
   --text-title_xxl: 80px;
