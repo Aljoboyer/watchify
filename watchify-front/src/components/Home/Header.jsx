@@ -23,7 +23,7 @@ export default function Header() {
                 bgColor='white'
                 textColor='black'
                 icon={<ArrowForward color='white' fontSize='30'/>}
-                other_style={{width: '200px', marginTop: '20px'}}
+                other_style={{width: '200px', marginTop: '20px', height: '50px'}}
                 />
             </div>
         </div>
