@@ -18,7 +18,17 @@ if(type == 'title_lg'){
   }
   if(type == 'title'){
         return (
-            <p className={`md:text-title  font-bold ${otherStyle} `}>{text}</p>
+            <p className={`md:text-title xsm:text-title_sm font-bold ${otherStyle} `}>{text}</p>
+        )
+  }
+ if(type == 'title_sm'){
+        return (
+            <p className={`xsm:text-title_sm font-bold ${otherStyle} `}>{text}</p>
+        )
+  }
+  if(type == 'p_lg'){
+        return (
+            <p className={`xsm:text-p_lg font-regular ${otherStyle} `}>{text}</p>
         )
   }
   else{

@@ -4,6 +4,7 @@
 @theme {
   /* ----------COLORS------------ */
   --color-basecolor: #000000;
+  --color-white:  #ffffff;
   --color-maroon: #8b0000;
   --color-grey50:  #f8fafc;
   --color-grey100: #eef2f6;

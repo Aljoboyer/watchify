@@ -145,11 +145,17 @@ const Navbar = () => {
               <ListItemText primary="Logout" />
             </ListItem>
 
-           <ListItem>
+            <ListItem>
                   <Buttons onClickHandler={() => {
                     setDrawerOpen(false)
                     router.push('/login')
                   }} title='LOGIN'/>
+            </ListItem>
+
+           <ListItem>
+                <Badge badgeContent={4} color="secondary">
+                <FaCartArrowDown color={COLORS.bluemain} size={35}/>
+              </Badge>
             </ListItem>
 
              <ListItem>

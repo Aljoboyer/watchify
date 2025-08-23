@@ -6,7 +6,7 @@ import WText from '../Shared/WText/WText';
 export default function EchoesOfTime() {
   return (
     <section className="px-6 py-16 bg-white">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
         {/* Left Content */}
         <div>

@@ -2,7 +2,7 @@
 
 export const COLORS = {
     baseColor: '#000000',
-    side_yellow: '#fff000',
+    white: '#ffffffff',
     overlay: '#e6f6f6',
     successOverlay: '#b9f6ca',
     greenMain: '#00c853',
