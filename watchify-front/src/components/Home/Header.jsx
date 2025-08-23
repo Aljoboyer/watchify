@@ -15,8 +15,8 @@ export default function Header() {
                 />
                 <WText
                 text="The Perfect Combination Of Classic Beauty And Trendy Style"
-                type='title'
-                otherStyle='text-white font-regular '
+                type='title_sm'
+                otherStyle='text-white font-normal '
                 />
                 <Buttons
                 title='Shop Now'

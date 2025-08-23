@@ -6,7 +6,6 @@ import { Box, Checkbox, FormControl, FormControlLabel,
 import React from 'react'
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
-import { AutoCompletes } from './AutoComplete';
 import { COLORS } from '../../../theme/colors';
 
 export const customStyle = {
@@ -53,8 +52,7 @@ export default function AllInputs({
   placeholder,
   options,
   onChangeHandler,
-  fieldItem,
-  unSelectShow=false
+  value
 }) {
    const [showPassword, setShowPassword] = React.useState(false);
 
@@ -88,7 +86,7 @@ export default function AllInputs({
   return (
     <Paper
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: {xs: '100%', md: '32%'} , ...otherStyle}}
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: {xs: '100%', md: '100%'} , ...otherStyle}}
       elevation={1}
       variant="outlined"
     >
@@ -104,18 +102,7 @@ export default function AllInputs({
     </Paper>
   )
  }
- else if (inputType == 'autocomplete'){
-  return(
-    <div className='w-full'>
-        <AutoCompletes 
-        onChangeHandler={onChangeHandler}  
-        field={field} 
-        otherStyle={otherStyle} 
-        options={options} 
-        label={label}/>
-    </div>
-  )
- }
+
  else if(inputType == 'number'){
   return (
       <div className='w-full'>
@@ -142,10 +129,9 @@ export default function AllInputs({
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         label={label}
-        value={field?.value ? field?.value : fieldItem?.value } 
-        onChange={(e) => onChangeHandler(field_id, e.target.value)} 
+        value={value}
+        onChange={(e) => onChangeHandler(e.target.value)} 
       >
-         {unSelectShow && <MenuItem value={''}>Remove</MenuItem>} 
         {
           options?.map((item) => (
               <MenuItem value={item?.value}>{item?.label}</MenuItem>
@@ -153,7 +139,6 @@ export default function AllInputs({
         }
       
       </Select>
-
 </FormControl>
   )
  }

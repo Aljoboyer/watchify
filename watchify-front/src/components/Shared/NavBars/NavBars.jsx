@@ -29,10 +29,10 @@ import { FaCartArrowDown } from "react-icons/fa";
 import Cart from '../../Cart/Cart';
 
 const navItems = [
-    {label: 'Home', link: '/flat-finder-home'},
-    {label: 'Find Watches', link: '/search-property', stateValue:  'all'},
-    {label: 'Men Watches', link: '/search-property', stateValue:  'men'},
-    {label: 'Women Watches', link: '/search-property', stateValue:  'women'},
+    {label: 'Home', link: '/'},
+    {label: 'Find Watches', link: '/watch-shop', stateValue:  'all'},
+    {label: 'Men Watches', link: '/watch-shop', stateValue:  'men'},
+    {label: 'Women Watches', link: '/watch-shop', stateValue:  'women'},
 ];
 
 const Navbar = () => {
@@ -49,7 +49,7 @@ const Navbar = () => {
 
 
   const navigationHanlder = (item) => {
- 
+    navigate(`${item.link}`)
   }
 
   return (
