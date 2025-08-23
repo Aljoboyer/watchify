@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pagination, Select, MenuItem, Box, Typography } from '@mui/material';
 import { COLORS } from '../../../theme/colors';
 
-export default function Pagination({
+export default function ProductPagination({
   totalPage,
   handlePageChange,
   handlePerPageChange,
@@ -35,7 +35,7 @@ export default function Pagination({
           marginTop: {xs: '5px', md: '0px'},
           '& .MuiPaginationItem-root.Mui-selected': {
             backgroundColor: `${COLORS.baseColor} !important`,
-            color: `${COLORS.side_yellow} !important`,
+            color: `${COLORS.white} !important`,
             '&:hover': {
               backgroundColor: `${COLORS.baseColor} !important`,
             },

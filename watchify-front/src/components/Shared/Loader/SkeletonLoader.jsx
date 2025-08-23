@@ -11,10 +11,7 @@ const SkeletonLoader = () => {
       <div className="relative">
         <Skeleton variant="rectangular" height={256} width="100%" />
 
-        <div className="absolute top-2 right-2 bg-black/60 text-white p-1 rounded flex items-center gap-1">
-          <ImageIcon fontSize="small" />
-          <Skeleton variant="text" width={20} height={20} />
-        </div>
+   
       </div>
 
       <div className="p-4 space-y-3">
@@ -24,11 +21,11 @@ const SkeletonLoader = () => {
 
         <div className="flex items-center gap-4 text-sm text-gray-700">
           <div className="flex items-center gap-1">
-            <BedIcon fontSize="small" className="text-green-600" />
+            <BedIcon fontSize="small" className="text-black" />
             <Skeleton variant="text" width={40} height={20} />
           </div>
           <div className="flex items-center gap-1">
-            <BathtubIcon fontSize="small" className="text-green-600" />
+            <BathtubIcon fontSize="small" className="text-black" />
             <Skeleton variant="text" width={40} height={20} />
           </div>
         </div>

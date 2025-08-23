@@ -17,7 +17,7 @@ const productBulkCreateCtrl = async (req, res) => {
   const productListCtrl = async (req, res) => {
   
     try {
-        
+        console.log('hitted')
         const result = await productListServ(req.query)
          res.send(result)
     } catch (error) {

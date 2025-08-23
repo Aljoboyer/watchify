@@ -7,7 +7,7 @@ import { FaCartArrowDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { getLocalStorageData } from '../../utils/getLocalStorageData';
 
-export default function ProductCard() {
+export default function ProductCard({product}) {
   const navigate = useNavigate();
   const userData = getLocalStorageData();
   
@@ -22,31 +22,33 @@ export default function ProductCard() {
   return (
     <div className='w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto cursor-pointer product_card p-2 flex flex-col items-center'>
         <img
-          src={W1Img} 
+          src={product?.image} 
           alt="Apartment"
           className="w-full h-64 object-contain"
         />
-        <div className='mt-4'>
-            <WText
-            text="Cairnhill"
-            type='title'
-            otherStyle='uppercase text-center'
-            />
-            <WText
-            text="MT463SK ST WH MT"
-            type='p_lg'
-            otherStyle='text-center'
-            />
-            <WText
-            text="$898"
-            type='title_sm'
-            otherStyle='text-maroon font-bold text-center'
-            />
+        <div className='mt-4 flex flex-col justify-center'>
+            <div className='h-[140px]'>
+                <WText
+                text={product?.name}
+                type='p_lg'
+                otherStyle='uppercase text-center  font-semibold'
+                />
+                <WText
+                text={product?.modelName}
+                type='p'
+                otherStyle='text-center'
+                />
+                <WText
+                text={`$ ${product?.price}`}
+                type='title_sm'
+                otherStyle='text-maroon font-bold text-center'
+                />
+            </div>
             <Buttons
             title='Add To Cart'
             bgColor={COLORS.baseColor}
             textColor='white'
-            other_style={{':hover': {backgroundColor: COLORS.white, color: COLORS.baseColor, borderColor: COLORS.baseColor}, width: '200px', heigth: '55px', margin: '10px 0px 10px 0px'}}
+            other_style={{':hover': {backgroundColor: COLORS.white, color: COLORS.baseColor, borderColor: COLORS.baseColor}, width: '200px', heigth: '55px', margin: '10px 0px 10px 0px', alignSelf: 'center'}}
             icon={<FaCartArrowDown  size={25} className='ml-4'/>}
             onClickHandler={() => addToCartHandler()}
             />
