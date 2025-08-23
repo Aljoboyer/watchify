@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+
+@theme {
+  /* ----------COLORS------------ */
+  --color-basecolor: #000000;
+  --color-maroon: #8b0000;
+
+  /* ----------TEXT SIZE---------- */
+  --text-title_xxl: 60px;
+  --text-title_xl: 40px;
+  --text-title_lg: 35px;
+  --text-title: 25px;
+  --text-title_sm: 20px;
+  --text-p_lg: 18px;
+  --text-p: 16px;
+  --text-psm: 14px;
+  --text-xsm: 12px;
+
+  /* ----------Break Point---------- */
+  --breakpoint-xsm: 330px;
+}

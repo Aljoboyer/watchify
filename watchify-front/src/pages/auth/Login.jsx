@@ -8,10 +8,13 @@ import { Buttons } from "../../components/Shared/Buttons/Buttons";
 import { COLORS } from "../../theme/colors";
 import AuthLayout from "../../components/Layouts/AuthLayout/AuthLayout";
 // import { useLogInMutation } from "@/app/redux/features/authApi";
+import { useNavigate } from 'react-router-dom';
+import WText from "../../components/Shared/WText/WText";
 
 export default function Login() {
 //   const [useLoginHandler, { }] = useLogInMutation();
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const {
     handleSubmit,
@@ -51,7 +54,11 @@ export default function Login() {
   return (
       <AuthLayout>
         <div className="w-full max-w-md">
-          <h2 className="text-title font-bold text-basecolor mb-4">Sign in</h2>
+          <WText
+          type="title"
+          text="Login"
+          otherStyle='mb-4 text-maroon'
+          />
 
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
               {
@@ -88,7 +95,7 @@ export default function Login() {
 
             <p className="text-p text-center mt-4">
               New to Watchify?{" "}
-              <span onClick={() => console.log('')} className="font-bold text-basecolor cursor-pointer">Create Account</span>
+              <span onClick={() => navigate('/register')} className="font-bold text-basecolor cursor-pointer">Create Account</span>
             </p>
         </div>
       </AuthLayout>

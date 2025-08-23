@@ -24,6 +24,7 @@ import ProfileManu from '../../UserCom/ProfileManu';
 import { Buttons } from '../Buttons/Buttons';
 import { COLORS } from '../../../theme/colors';
 import { FiWatch } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
 
 const navItems = [
     {label: 'Home', link: '/flat-finder-home'},
@@ -35,6 +36,7 @@ const navItems = [
 const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate()
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
@@ -52,7 +54,7 @@ const Navbar = () => {
 
       <Toolbar sx={{ justifyContent: 'space-between' , paddingTop: '10px'}}>
         {/* Brand */}
-       <div onClick={() => router.push('/flat-finder-home')} className='flex flex-row items-center cursor-pointer'>
+       <div onClick={() => navigate('/')} className='flex flex-row items-center cursor-pointer'>
          <Typography variant="h5" sx={{ fontWeight: 'bold', color: COLORS.maroon }}>
           WATCH
         </Typography>
@@ -94,9 +96,9 @@ const Navbar = () => {
                 },
               }}
             >
-              <span onClick={() => router.push('/login')} className="text-link">LOGIN</span>
+              <span onClick={() => navigate('/login')} className="text-link">LOGIN</span>
               <span className="divider">/</span>
-              <span onClick={() => router.push('/register')} className="text-link">REGISTER</span>
+              <span onClick={() => navigate('/register')} className="text-link">REGISTER</span>
             </Button>
             
             </>

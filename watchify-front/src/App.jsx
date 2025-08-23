@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
 import Home from './pages/shared/Home/Home';
 import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
    </main>

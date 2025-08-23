@@ -53,24 +53,5 @@ export const authFormFields =  [
         },
         inputType: 'password'
     },
-    {
-        field_id: 'nidNo',
-        label: 'NID No.',
-        placeholder: 'Enter your NID number',
-         required:{
-            required: 'Enter valid NID number',
-            min: 4
-        },
-        inputType: 'textfield'
-    },
-    {
-        field_id: 'propertyName',
-        label: 'Property Name',
-        placeholder: 'Enter your Property Name',
-         required:{
-            required: 'Enter valid Property Name',
-            min: 4
-        },
-        inputType: 'textfield'
-    },
+ 
 ]
