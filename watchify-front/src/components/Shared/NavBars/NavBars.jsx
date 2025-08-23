@@ -24,7 +24,7 @@ import ProfileManu from '../../UserCom/ProfileManu';
 import { Buttons } from '../Buttons/Buttons';
 import { COLORS } from '../../../theme/colors';
 import { FiWatch } from "react-icons/fi";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaCartArrowDown } from "react-icons/fa";
 import Cart from '../../Cart/Cart';
 
@@ -39,6 +39,7 @@ const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate()
+  const location = useLocation();
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = React.useState(false);
@@ -49,9 +50,12 @@ const Navbar = () => {
 
 
   const navigationHanlder = (item) => {
-    navigate(`${item.link}`)
+        navigate(`${item.link}`, {
+      state: item?.stateValue
+    });
   }
 
+  console.log('location -------', location)
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000', boxShadow: 'none', }}>
       <Box sx={{ borderBottom: `4px solid ${COLORS.maroon}` }} />
@@ -69,7 +73,11 @@ const Navbar = () => {
         {
           !isMobile &&<Box sx={{ display: 'flex', gap: 3 }}>
             {navItems.map((item) => (
-              <Button onClick={() => navigationHanlder(item)} key={item?.label} sx={{ color: COLORS.baseColor, fontWeight: '600', ":hover":{ backgroundColor: COLORS.maroon, color: 'white'} }}>{item?.label}</Button>
+              <Button onClick={() => navigationHanlder(item)} key={item?.label} sx={{ 
+                color: location?.state == item?.stateValue ? COLORS.white : COLORS.baseColor, 
+                fontWeight: '600', 
+                backgroundColor: location?.state == item?.stateValue ? COLORS.maroon : '',
+                ":hover":{ backgroundColor: COLORS.maroon, color: 'white'} }}>{item?.label}</Button>
             ))}
           </Box>
         }
