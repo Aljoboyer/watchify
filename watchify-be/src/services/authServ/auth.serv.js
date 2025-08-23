@@ -5,27 +5,27 @@ const UserCollection = require("../../models/user");
 const SecretKey = process.env.SECRETKEY;
 
 const loginServ = async (reqData) => {
-  const { email, password } = req.body;
-   const oldUser = await UserCollection.findOne({ email: email });
+  const { email, password } = reqData;
+   const result = await UserCollection.findOne({ email: email });
     
-    if (!oldUser){
-        const errMsg = { message: "User doesn't exist with this email" }
+    if (!result){
+        const errMsg = { message: "User doesn't exist with this email" ,}
         return errMsg
     }
 
 
-    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+    const isPasswordCorrect = await bcrypt.compare(password, result.password);
 
     if (!isPasswordCorrect){
         const errMsg = { message:  "Incorrect password"}
         return errMsg
     }
 
-    const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, SecretKey,  {
+    const token = jwt.sign({ email: result.email, id: result._id }, SecretKey,  {
       expiresIn: "24h",
     });
 
-    return {user: oldUser, token}
+    return {result, token}
 };
 
 // User Signup
@@ -49,7 +49,7 @@ const signUpServ = async (reqData) => {
       const hashedPassword = await bcrypt.hash(password, 12);
   
       const result = await UserCollection.create({
-        ...requestData,
+        ...reqData,
         password: hashedPassword,
       });
   
