@@ -6,14 +6,34 @@ import { COLORS } from '../../theme/colors';
 import { FaCartArrowDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { getLocalStorageData } from '../../utils/getLocalStorageData';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductToCart } from '../../redux/slices/commonSlice';
 
 export default function ProductCard({product}) {
   const navigate = useNavigate();
   const userData = getLocalStorageData();
-  
+  const dispatch = useDispatch();
+  const productCart = useSelector((state) => state.commonstore.cart);
+
   const addToCartHandler = (item) => {
     if(userData?.email){
-      
+
+      const isProductExists = productCart?.find((prod) => prod?.id == item?._id);
+      if(isProductExists?.id){
+        const increaseProdQty =  productCart?.map((prod) => {
+            if(prod?.id == item?._id){
+              const newObj = {...prod, qty: prod?.qty + 1}
+              return newObj
+            }else{
+              return prod;
+            }
+        });
+          dispatch(setProductToCart(increaseProdQty));
+
+      }else{
+        const newCartArr = [...productCart, {id: item?._id, name: item?.name, image: item?.image, qty: 1, price: item?.price}]
+        dispatch(setProductToCart(newCartArr));
+      }
     }else{
       navigate('/login')
     }
@@ -50,7 +70,7 @@ export default function ProductCard({product}) {
             textColor='white'
             other_style={{':hover': {backgroundColor: COLORS.white, color: COLORS.baseColor, borderColor: COLORS.baseColor}, width: '200px', heigth: '55px', margin: '10px 0px 10px 0px', alignSelf: 'center'}}
             icon={<FaCartArrowDown  size={25} className='ml-4'/>}
-            onClickHandler={() => addToCartHandler()}
+            onClickHandler={() => addToCartHandler(product)}
             />
         </div>
     </div>

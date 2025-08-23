@@ -28,6 +28,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaCartArrowDown } from "react-icons/fa";
 import Cart from '../../Cart/Cart';
 import { getLocalStorageData } from '../../../utils/getLocalStorageData';
+import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 
 const navItems = [
     {label: 'Home', link: '/'},
@@ -45,6 +47,7 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = React.useState(false);
   const userData = getLocalStorageData();
+  const productCart = useSelector((state) => state.commonstore.cart);
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -61,6 +64,26 @@ const Navbar = () => {
     localStorage.removeItem('watchify_user');
     navigate('/')
   }
+
+    const { totalQty } = useMemo(() => {
+    if (!Array.isArray(productCart) || productCart.length === 0) {
+      return { totalQty: 0 };
+    }
+
+    return productCart.reduce(
+      (totals, item) => {
+        const qty = Number(item?.qty) || 0;
+        
+        return {
+          totalQty: totals.totalQty + qty,
+        };
+      },
+      { totalQty: 0 }
+    );
+  }, [productCart]);
+
+
+  console.log('productCart ====>', productCart);
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000', boxShadow: 'none', }}>
@@ -91,7 +114,7 @@ const Navbar = () => {
         {/* Right Section */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             {
-              userData?.email && <Badge badgeContent={4} color="info" sx={{cursor: 'pointer'}}>
+              userData?.email && <Badge badgeContent={totalQty} color="info" sx={{cursor: 'pointer'}}>
               <FaCartArrowDown onClick={() => setCartDrawerOpen(true)} color={COLORS.maroon} size={35}/>
             </Badge>
             }

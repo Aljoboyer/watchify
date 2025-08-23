@@ -40,7 +40,7 @@ export default function WatchShop() {
         setSearchText(searchVal)
         setTimeout(productFetch(), 1000)
     }
-    console.log('productList ===> ', productList)
+ 
   return (
    <RootLayout>
         <div className='w-full'>
