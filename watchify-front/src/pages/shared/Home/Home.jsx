@@ -4,6 +4,9 @@ import Header from '../../../components/Home/Header'
 import EchoesOfTime from '../../../components/Home/EcheosOfTime'
 import ProductCard from '../../../components/ProductCard/ProductCard'
 import SectionTitle from '../../../components/Shared/SectionTitle/SectionTitle'
+import { Buttons } from '../../../components/Shared/Buttons/Buttons'
+import { COLORS } from '../../../theme/colors'
+import { ArrowForward } from '@mui/icons-material'
 
 export default function Home() {
   return (
@@ -20,6 +23,15 @@ export default function Home() {
                   <ProductCard key={item}/>
                 ))
               }
+            </div>
+            <div className='flex flex-row justify-center mt-13'>
+              <Buttons
+                title='VIEW MORE'
+                textColor={COLORS.white}
+                bgColor={COLORS.maroon}
+                other_style={{width: '150px', height: '60px'}}
+                icon={<ArrowForward className='ml-2'/>}
+                />
             </div>
         </div>
         <EchoesOfTime/>

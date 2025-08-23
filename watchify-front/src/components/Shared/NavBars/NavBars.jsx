@@ -26,6 +26,7 @@ import { COLORS } from '../../../theme/colors';
 import { FiWatch } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { FaCartArrowDown } from "react-icons/fa";
+import Cart from '../../Cart/Cart';
 
 const navItems = [
     {label: 'Home', link: '/flat-finder-home'},
@@ -40,10 +41,12 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = React.useState(false);
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
+
 
   const navigationHanlder = (item) => {
  
@@ -73,13 +76,14 @@ const Navbar = () => {
 
         {/* Right Section */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Badge badgeContent={4} color="info" sx={{cursor: 'pointer'}}>
+              <FaCartArrowDown onClick={() => setCartDrawerOpen(true)} color={COLORS.maroon} size={35}/>
+            </Badge>
+
           {!isMobile && (
             <>
-            <Badge badgeContent={4} color="secondary">
-            <FaCartArrowDown color={COLORS.bluemain} size={35}/>
-          </Badge>
-
            <ProfileManu /> 
+
             <Button
               variant="contained"
               sx={{
@@ -114,7 +118,11 @@ const Navbar = () => {
           )}
         </Box>
       </Toolbar>
-
+      
+      {/* Cart Drawer */}
+      <Drawer anchor="right" open={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)}>
+          <Cart setCartDrawerOpen={setCartDrawerOpen}/>
+      </Drawer>
 
       {/* Mobile Drawer */}
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
@@ -150,12 +158,6 @@ const Navbar = () => {
                     setDrawerOpen(false)
                     router.push('/login')
                   }} title='LOGIN'/>
-            </ListItem>
-
-           <ListItem>
-                <Badge badgeContent={4} color="secondary">
-                <FaCartArrowDown color={COLORS.bluemain} size={35}/>
-              </Badge>
             </ListItem>
 
              <ListItem>
