@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { getLocalStorageData } from '../../utils/getLocalStorageData';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductToCart } from '../../redux/slices/commonSlice';
+import { successToast } from '../../utils/toaster/toaster';
 
 export default function ProductCard({product}) {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function ProductCard({product}) {
         const newCartArr = [...productCart, {id: item?._id, name: item?.name, image: item?.image, qty: 1, price: item?.price}]
         dispatch(setProductToCart(newCartArr));
       }
+      successToast('Product successfully added to cart')
     }else{
       navigate('/login')
     }

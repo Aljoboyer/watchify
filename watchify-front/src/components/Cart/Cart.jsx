@@ -2,13 +2,14 @@ import { Box } from '@mui/material'
 import React from 'react'
 import { Buttons } from '../Shared/Buttons/Buttons'
 import { COLORS } from '../../theme/colors'
-import { Delete } from '@mui/icons-material'
-import { FaMinus, FaPlus } from 'react-icons/fa'
+
 import WText from '../Shared/WText/WText'
 import { useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
 import { setProductToCart } from '../../redux/slices/commonSlice'
 import { useDispatch, useSelector } from 'react-redux';
+import CartProdCard from './CartProdCard'
+import { successToast } from '../../utils/toaster/toaster'
 
 export default function Cart({setCartDrawerOpen}) {
   const navigate = useNavigate();
@@ -48,6 +49,8 @@ export default function Cart({setCartDrawerOpen}) {
             }
         });
           dispatch(setProductToCart(calProdQty));
+          const msg = action == 'plus' ? 'Product successfully added to cart' : "Product successfully removed from cart"
+          successToast(msg)
       }
     }
 
@@ -59,6 +62,7 @@ export default function Cart({setCartDrawerOpen}) {
         const filterCart = productCart?.filter((prod) => prod?.id !== item?.id )  
         
         dispatch(setProductToCart(filterCart));
+        successToast('Product successfully removed from cart')
       }
     }
     
@@ -84,42 +88,30 @@ export default function Cart({setCartDrawerOpen}) {
     </div>
 
     {/* Cart Items */}
-    <div className="flex flex-col gap-6 flex-grow overflow-y-auto py-4">
+    {
+      productCart?.length == 0 ? <div>
+        <WText
+        type="title"
+        text="Your cart is empty. Start adding products you love!"
+        otherStyle='text-gray-500'
+        />
+      </div> : <div className="flex flex-col gap-6 flex-grow overflow-y-auto py-4">
       {/* Single Item */}
-     {
-        productCart?.map((item) => (
-             <div className="flex gap-4">
-                {/* Product Image */}
-                <img
-                src={item?.image}
-                alt="product"
-                className="w-24 h-28 object-cover border"
-                />
-                {/* Product Details */}
-                <div className="flex flex-col justify-between flex-grow">
-                <div>
-                    <h3 className="font-semibold">{item?.name}</h3>
-                    <p className="text-gray-600 mt-2">$ {item?.price}</p>
-                     <p className="text-gray-700 my-2">Quantity : {item?.qty}</p>
-                </div>
-                {/* Quantity & Remove */}
-                <div className="flex items-center gap-3">
-                    <div className="flex items-center border px-2 py-2">
-                    <button onClick={() => addToCartHandler(item, 'minus')} className="px-2"><FaMinus/></button>
-                    <span className="px-3">1</span>
-                    <button onClick={() => addToCartHandler(item, 'plus')} className="px-2"><FaPlus/></button>
-                    </div>
-                    <button onClick={() => removeToCartHandler(item)} className="cursor-pointer">
-                      <Delete className="text-red-500"/>
-                    </button>
-                </div>
-                </div>
-            </div>
-        ))
-     }
+        {
+          productCart?.map((item) => (
+              <CartProdCard 
+              item={item} 
+              addToCartHandler={addToCartHandler}
+              removeToCartHandler={removeToCartHandler}
+              />
+          ))
+        }
     </div>
+    }
 
     {/* Footer */}
+    {
+      productCart?.length > 0 && 
     <div className="border-t pt-4">
       {/* Subtotal */}
       <div className="flex justify-between items-center mb-4">
@@ -137,6 +129,7 @@ export default function Cart({setCartDrawerOpen}) {
          />
       </div>
     </div>
+    }
   </Box>
   )
 }
