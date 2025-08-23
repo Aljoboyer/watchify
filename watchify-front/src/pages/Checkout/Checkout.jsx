@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import RootLayout from '../../components/Layouts/RootLayout/RootLayout'
 import WText from '../../components/Shared/WText/WText'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { Delete } from '@mui/icons-material'
+import { getLocalStorageData } from '../../utils/getLocalStorageData'
+import { useNavigate } from 'react-router-dom'
+import Loader from '../../components/Shared/Loader/Loader'
 
 
 export default function Checkout() {
+    const [loading, setLoading] = useState(true)
+    const userData = getLocalStorageData();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!userData?.email){
+            navigate('/login')
+        }else{
+            setLoading(false)
+        }
+    },[userData?.email]);
 
   return (
    <RootLayout>
-        <div className='w-full'>
+        {
+            loading ? <div className='flex flex-row justify-center items-center h-screen w-full'><Loader/> </div>: <div className='w-full'>
             <div className='bg-black py-7'>
                 <WText
                     type="title_xxl"
@@ -48,8 +63,8 @@ export default function Checkout() {
                     </div>
                 </div>
             </div>
-
-        </div>
+            </div>
+        }
    </RootLayout>
   )
 }
