@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors())
 app.use(express.json()); // For JSON bodies
@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
   res.send('Watchify Server is connected!')
 })
 
-app.listen(port, () => {
-  console.log(`Watchify Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Watchify Server running on port ${PORT}`);
 });
 
 // module.exports = app;
