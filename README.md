@@ -1,8 +1,4 @@
-<div align="center">
-
-# 🚀 [Watchify Live](https://your-live-site-url.com](https://watchify-eight.vercel.app/)
-
-</div>
+#  [Watchify Live](https://your-live-site-url.com](https://watchify-eight.vercel.app/)
 
 ---
 
@@ -20,3 +16,5 @@
 * Backend: Node.js, Express, 
 * Database: MongoDB
 * Payment Gatway : Stripe
+
+  
