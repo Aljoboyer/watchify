@@ -10,8 +10,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // database connetion
 const connectDB = require("./src/DBConnection/DBConnection");
-connectDB()
 
+(async () => {
+  try {
+    await connectDB();
+    
+  } catch (err) {
+    console.error("DB connection failed ❌", err);
+  }
+})();
 
 const mainRouter = require('./src/routes/index');
 
@@ -22,8 +29,8 @@ app.get('/', (req, res) => {
   res.send('Watchify Server is connected!')
 })
 
-// app.listen(port, () => {
-//   console.log(`Watchify Server running on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Watchify Server running on port ${port}`);
+});
 
 module.exports = app;

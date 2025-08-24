@@ -13,7 +13,7 @@ const connectDB = () => {
         // useNewUrlParser: true,
         // version: ServerApiVersion.v1,
       },
-      console.log("connected to database")
+    console.log("DB connected ✅")
     );
   } catch (error) {
     console.log(error);
