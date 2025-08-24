@@ -12,6 +12,11 @@ import { useMemo } from 'react'
 import { setProductToCart } from '../../redux/slices/commonSlice'
 import CartProdCard from '../../components/Cart/CartProdCard'
 import { successToast } from '../../utils/toaster/toaster'
+import CheckoutForm from '../../components/CheckoutForm/CheckoutForm'
+import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 
 export default function Checkout() {
@@ -125,6 +130,9 @@ export default function Checkout() {
                             </div>
  
                         </div>
+                        <Elements  stripe={stripePromise}>
+                          <CheckoutForm orderCart={productCart} totalPrice={totalPrice}/>
+                      </Elements>
                     </div>
                 </div>
             </div>

@@ -1,18 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import {api} from './api/api';
-import {persistReducer, persistStore,  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,} from 'redux-persist';
+import {persistReducer, persistStore, } from 'redux-persist';
 import localforage from 'localforage';
 import { rootReducer } from './rootReducers';
 
 const persistConfig={
   key: 'persist-store', 
-  storage: localforage
+  storage: localforage,
+  blacklist: ['api'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -21,9 +17,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }).concat(api.middleware),
 
 })
