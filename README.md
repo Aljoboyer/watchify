@@ -1,4 +1,8 @@
-#  [Watchify Live](https://your-live-site-url.com](https://watchify-eight.vercel.app/)
+<div align="center">
+
+# 🚀 [Watchify Live](https://watchify-eight.vercel.app/)
+
+</div>
 
 ---
 
@@ -12,9 +16,7 @@
 
 ## 🧰 Tech Stack
 
-* Frontend: React, Redux, tailwindcss, material ui
-* Backend: Node.js, Express, 
+* Frontend: React, Redux, Tailwind CSS, Material UI
+* Backend: Node.js, Express
 * Database: MongoDB
-* Payment Gatway : Stripe
-
-  
+* Payment Gateway: Stripe
