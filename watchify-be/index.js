@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
   res.send('Watchify Server is connected!')
 })
 
-app.listen(port, () => {
-  console.log(`Watchify Server running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Watchify Server running on port ${port}`);
+// });
+
+module.exports = app;
