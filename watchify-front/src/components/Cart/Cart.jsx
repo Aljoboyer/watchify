@@ -42,7 +42,7 @@ export default function Cart({setCartDrawerOpen}) {
       if(isProductExists?.id){
         const calProdQty =  productCart?.map((prod) => {
             if(prod?.id == item?.id){
-              const newObj = {...prod, qty: (action == 'minus' && prod?.qty) > 1  ?  prod?.qty - 1 : prod?.qty + 1 }
+              const newObj = {...prod, qty: (action == 'minus' && prod?.qty  > 1)  ?  prod?.qty - 1 : (action == 'minus' && prod?.qty == 1) ? 1 :   prod?.qty + 1 }
               return newObj
             }else{
               return prod;
