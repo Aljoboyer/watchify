@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 [Watchify Live]([https://your-live-site-url.com](https://watchify-eight.vercel.app/))
+# 🚀 [Watchify Live](https://your-live-site-url.com](https://watchify-eight.vercel.app/)
 
 </div>
 
