@@ -34,8 +34,8 @@ import { useMemo } from 'react';
 const navItems = [
     {label: 'Home', link: '/'},
     {label: 'Find Watches', link: '/watch-shop', stateValue:  'all'},
-    {label: 'Men Watches', link: '/watch-shop', stateValue:  'men'},
-    {label: 'Women Watches', link: '/watch-shop', stateValue:  'women'},
+    {label: 'Men Watches', link: '/watch-shop', stateValue:  'Male'},
+    {label: 'Women Watches', link: '/watch-shop', stateValue:  'Female'},
 ];
 
 const Navbar = () => {
@@ -82,8 +82,6 @@ const Navbar = () => {
     );
   }, [productCart]);
 
-
-  console.log('productCart ====>', productCart);
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000', boxShadow: 'none', }}>

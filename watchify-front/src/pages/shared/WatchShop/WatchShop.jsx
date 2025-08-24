@@ -9,6 +9,7 @@ import { useLazyGetProductListQuery } from '../../../redux/features/productApi'
 import ProductPagination from '../../../components/Shared/Pagination/Pagination'
 import SkeletonLoader from '../../../components/Shared/Loader/SkeletonLoader'
 import NoDataView from '../../../components/Shared/NoDataView/NoDataView'
+import { useLocation } from 'react-router-dom'
 
 export default function WatchShop() {
     const [productListTrigger, { data: productList, error, isLoading , isFetching}] = useLazyGetProductListQuery();
@@ -17,6 +18,7 @@ export default function WatchShop() {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
     const [searchText, setSearchText] = useState('')
+    const location = useLocation();
 
     const productFetch = () => {
     
@@ -40,7 +42,13 @@ export default function WatchShop() {
         setSearchText(searchVal)
         setTimeout(productFetch(), 1000)
     }
- 
+    
+    useEffect(() => {
+        if(location?.state){
+            setGender(location?.state)
+        }
+    },[location?.state])
+
   return (
    <RootLayout>
         <div className='w-full'>
