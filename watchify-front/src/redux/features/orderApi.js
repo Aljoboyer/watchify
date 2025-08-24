@@ -8,14 +8,18 @@ const orderApi = api.injectEndpoints({
       query: (requestBody) =>(
         mutationCall('/order/payment/create-intent','POST', requestBody)
       ),
-
     }),
 
+    orderProcess: builder.mutation({
+      query: (requestBody) =>(
+        mutationCall('/order/process','POST', requestBody)
+      ),
+    }),
 
   }),
 });
 
 export const {
   usePaymentIntentCreateMutation,
-
+  useOrderProcessMutation
 } = orderApi;

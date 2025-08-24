@@ -2,17 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { errorToast, successToast } from '../../utils/toaster/toaster';
 import FFLoader2 from '../../components/Shared/Loader/Loader';
-import { usePaymentIntentCreateMutation } from '../../redux/features/orderApi';
+import { useOrderProcessMutation, usePaymentIntentCreateMutation } from '../../redux/features/orderApi';
 import { Buttons } from '../Shared/Buttons/Buttons';
 import { COLORS } from '../../theme/colors';
+import { getLocalStorageData } from '../../utils/getLocalStorageData';
+import Loader from '../../components/Shared/Loader/Loader';
+import { useDispatch } from 'react-redux';
+import { setProductToCart } from '../../redux/slices/commonSlice';
 
 export default function CheckoutForm({orderCart, totalPrice}) {
   const stripe = useStripe();
   const elements = useElements();
   const [createPaymentIntent, { isLoading: intentLoading }] = usePaymentIntentCreateMutation();
+  const [processOrderHandler, { isLoading: orderProcessLoading }] = useOrderProcessMutation();
   const[clientSecret , setClientSecret] = useState('')
   const [processing, setProcessing] = useState(false)
-
+  const userData = getLocalStorageData();
+  const dispatch = useDispatch();
+  
   const createIntent = async () => {
     const intentRes = await createPaymentIntent({totalamount: totalPrice})
 
@@ -20,8 +27,9 @@ export default function CheckoutForm({orderCart, totalPrice}) {
   }
 
   useEffect(() => {
-    // createIntent()
+    createIntent()
   },[])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,8 +65,8 @@ export default function CheckoutForm({orderCart, totalPrice}) {
             payment_method: {
               card: card,
               billing_details: {
-                name: property?.buyer?.name,
-                email: property?.buyer?.email
+                name: userData?.name,
+                email: userData?.email
               },
             },
           },
@@ -71,24 +79,35 @@ export default function CheckoutForm({orderCart, totalPrice}) {
         }
         else{
             const secretArray =  paymentIntent.client_secret.split('_')
-            const reqObj = {
-              _id: property?._id,
-              property: property?.property?._id,
-              buyer: property?.buyer?._id,
-              seller: property?.seller?._id,
-              amount: property?.property?.advanceMoney,
-              paymentIntentId: secretArray[secretArray.length - 1],
-              paidAt: new Date().toLocaleDateString()
+            const formatOrderArr = orderCart?.map((item) => {
+                const newObj = {
+                  product: item.id,
+                  price: Number(item.price), 
+                  quantity: Number(item.qty),
+                  subtotal: Number(item.qty) * Number(item.price),
+                }
+                return newObj;
+            })
+            const orderObj = {
+              user: userData?._id,
+              totalAmount: Number(totalPrice),
+              products: formatOrderArr
+            }
+            const paymentObj = {
+              user: userData?._id,
+              method: 'stripe',
+              amount: totalPrice,
+              currency: 'USD',
+              status: 'success',
+              transactionId: secretArray[secretArray.length - 1],
             }
 
-        //   const paymentRes = await completePayment(reqObj)
+          const paymentRes = await processOrderHandler({orderObj, paymentObj})
 
-          if(paymentRes?.data?.msg == 'payment success'){
-
-
+          if(paymentRes?.data?.msg == 'Order Processed Successfully'){
+            dispatch(setProductToCart([]))
             successToast('Payment Succesfull!')
             setProcessing(false)
-            handleClose()
           }
         }
     
@@ -97,7 +116,7 @@ export default function CheckoutForm({orderCart, totalPrice}) {
   return (
     <form className="w-full" onSubmit={handleSubmit}>
       {
-        intentLoading ? <div className='w-[100px] h-[50px] mx-auto'><FFLoader2/> </div> : <div className="border border-gray-300 rounded-md p-4 bg-white">
+        intentLoading ? <div className='w-[100px] h-[50px] mx-auto'><Loader/> </div> : <div className="border border-gray-300 rounded-md p-4 bg-white">
         <CardElement
           options={{
             style: {

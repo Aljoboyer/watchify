@@ -116,7 +116,8 @@ export default function Checkout() {
                         </div>
                       }
                     
-                    <div className='border-t'>
+                 {
+                  productCart?.length > 0 &&    <div className='border-t'>
                          <div className="w-[300px] pt-2">
                             {/* Subtotal */}
                             <div className="flex justify-between items-center mb-4">
@@ -134,6 +135,7 @@ export default function Checkout() {
                           <CheckoutForm orderCart={productCart} totalPrice={totalPrice}/>
                       </Elements>
                     </div>
+                 }
                 </div>
             </div>
             </div>
